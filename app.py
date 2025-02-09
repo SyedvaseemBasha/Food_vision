@@ -1,6 +1,7 @@
 import streamlit as st
 import tensorflow as tf
 import numpy as np
+import gdown
 from utils import load_and_prep_image, plot_top_10_probs, load_image_from_url, load_image_from_base64, create_temp_folder, preprocess_and_predict
 # from config import MODEL_PATH
 import os
@@ -14,24 +15,40 @@ st.set_page_config(layout="wide")
 # model = tf.keras.models.load_model(MODEL_PATH)
 
 # Define model URL (raw file link)
-MODEL_URL = "https://github.com/SyedvaseemBasha/Food_vision/raw/main/efficient_netb0_fine_tuned.keras"
-MODEL_PATH = "efficient_netb0_fine_tuned.keras"
+# MODEL_URL = "https://github.com/SyedvaseemBasha/Food_vision/raw/main/efficient_netb0_fine_tuned.keras"
+# MODEL_PATH = "efficient_netb0_fine_tuned.keras"
 
-# Download the model if it doesn't exist
-if not os.path.exists(MODEL_PATH):
-    st.info("Downloading model... Please wait.")
-    response = requests.get(MODEL_URL)
-    with open(MODEL_PATH, "wb") as f:
-        f.write(response.content)
-    st.success("Model downloaded successfully!")
+# # Download the model if it doesn't exist
+# if not os.path.exists(MODEL_PATH):
+#     st.info("Please wait...")
+#     response = requests.get(MODEL_URL)
+#     with open(MODEL_PATH, "wb") as f:
+#         f.write(response.content)
+#     st.success("Model downloaded successfully!")
+
+# # Load the model
+# st.info("Loading model...")
+# try:
+#     model = tf.keras.models.load_model(MODEL_PATH)
+#     st.success("Model loaded successfully!")
+# except Exception as e:
+#     st.error(f"Error loading model: {e}")
+
+
+# Google Drive file ID
+file_id = "10pavXORFdfGIyFRde_MFhobyuUWezEI5"
+download_url = f"https://drive.google.com/uc?id={file_id}"
+model_path = "model.h5"
+
+# Download the model
+@st.cache_resource
+def load_model():
+    gdown.download(download_url, model_path, quiet=False)
+    model = tf.keras.models.load_model(model_path)
+    return model
 
 # Load the model
-st.info("Loading model...")
-try:
-    model = tf.keras.models.load_model(MODEL_PATH)
-    st.success("Model loaded successfully!")
-except Exception as e:
-    st.error(f"Error loading model: {e}")
+model = load_model()
 
 
 class_names = ['apple_pie', 'baby_back_ribs', 'baklava', 'beef_carpaccio', 'beef_tartare', 'beet_salad', 'beignets', 'bibimbap',
