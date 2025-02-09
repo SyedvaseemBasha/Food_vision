@@ -103,7 +103,7 @@ import re
 st.set_page_config(layout="wide")
 
 # Load the trained model
-MODEL_PATH="P:/ML_PROJECTS/food101/efficient_netb0_fine_tuned.keras"
+MODEL_PATH="https://github.com/SyedvaseemBasha/Food_vision/blob/main/efficient_netb0_fine_tuned.keras"
 model = tf.keras.models.load_model(MODEL_PATH)
 
 class_names = ['apple_pie', 'baby_back_ribs', 'baklava', 'beef_carpaccio', 'beef_tartare', 'beet_salad', 'beignets', 'bibimbap',
