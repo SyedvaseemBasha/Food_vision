@@ -13,6 +13,32 @@ st.set_page_config(layout="wide")
 MODEL_PATH="https://github.com/SyedvaseemBasha/Food_vision/blob/main/efficient_netb0_fine_tuned.keras"
 model = tf.keras.models.load_model(MODEL_PATH)
 
+import streamlit as st
+import tensorflow as tf
+import requests
+import os
+
+# Define model URL (raw file link)
+MODEL_URL = "https://github.com/SyedvaseemBasha/Food_vision/raw/main/efficient_netb0_fine_tuned.keras"
+MODEL_PATH = MODEL_URL
+
+# Download the model if it doesn't exist
+if not os.path.exists(MODEL_PATH):
+    st.info("Downloading model... Please wait.")
+    response = requests.get(MODEL_URL)
+    with open(MODEL_PATH, "wb") as f:
+        f.write(response.content)
+    st.success("Model downloaded successfully!")
+
+# Load the model
+st.info("Loading model...")
+try:
+    model = tf.keras.models.load_model(MODEL_PATH)
+    st.success("Model loaded successfully!")
+except Exception as e:
+    st.error(f"Error loading model: {e}")
+
+
 class_names = ['apple_pie', 'baby_back_ribs', 'baklava', 'beef_carpaccio', 'beef_tartare', 'beet_salad', 'beignets', 'bibimbap',
                 'bread_pudding', 'breakfast_burrito', 'bruschetta', 'caesar_salad', 'cannoli', 'caprese_salad', 'carrot_cake', 
                 'ceviche', 'cheesecake', 'cheese_plate', 'chicken_curry', 'chicken_quesadilla', 'chicken_wings', 'chocolate_cake',
