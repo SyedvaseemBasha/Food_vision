@@ -38,7 +38,7 @@ st.set_page_config(layout="wide")
 # Google Drive file ID
 file_id = "10pavXORFdfGIyFRde_MFhobyuUWezEI5"
 download_url = f"https://drive.google.com/uc?id={file_id}"
-model_path = "model.h5"
+model_path = "model.keras"
 
 # Download the model
 @st.cache_resource
