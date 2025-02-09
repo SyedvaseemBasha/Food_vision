@@ -10,17 +10,12 @@ import re
 st.set_page_config(layout="wide")
 
 # Load the trained model
-MODEL_PATH="https://github.com/SyedvaseemBasha/Food_vision/blob/main/efficient_netb0_fine_tuned.keras"
-model = tf.keras.models.load_model(MODEL_PATH)
-
-import streamlit as st
-import tensorflow as tf
-import requests
-import os
+# MODEL_PATH="https://github.com/SyedvaseemBasha/Food_vision/blob/main/efficient_netb0_fine_tuned.keras"
+# model = tf.keras.models.load_model(MODEL_PATH)
 
 # Define model URL (raw file link)
 MODEL_URL = "https://github.com/SyedvaseemBasha/Food_vision/raw/main/efficient_netb0_fine_tuned.keras"
-MODEL_PATH = MODEL_URL
+MODEL_PATH = "efficient_netb0_fine_tuned.keras"
 
 # Download the model if it doesn't exist
 if not os.path.exists(MODEL_PATH):
