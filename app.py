@@ -27,10 +27,10 @@ if not os.path.exists(MODEL_PATH):
     st.success("Model downloaded successfully!")
 
 # Load the model
-st.info("Loading model...")
+# st.info("Loading model...")
 try:
     model = tf.keras.models.load_model(MODEL_PATH)
-    st.success("Model loaded successfully!")
+    # st.success("Model loaded successfully!")
 except Exception as e:
     st.error(f"Error loading model: {e}")
 
