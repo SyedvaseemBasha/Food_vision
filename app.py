@@ -14,41 +14,26 @@ st.set_page_config(layout="wide")
 # MODEL_PATH="https://github.com/SyedvaseemBasha/Food_vision/blob/main/efficient_netb0_fine_tuned.keras"
 # model = tf.keras.models.load_model(MODEL_PATH)
 
-# Define model URL (raw file link)
-# MODEL_URL = "https://github.com/SyedvaseemBasha/Food_vision/raw/main/efficient_netb0_fine_tuned.keras"
-# MODEL_PATH = "efficient_netb0_fine_tuned.keras"
+#Define model URL (raw file link)
+MODEL_URL = "https://github.com/SyedvaseemBasha/Food_vision/raw/main/efficient_netb0_fine_tuned.keras"
+MODEL_PATH = "efficient_netb0_fine_tuned.keras"
 
-# # Download the model if it doesn't exist
-# if not os.path.exists(MODEL_PATH):
-#     st.info("Please wait...")
-#     response = requests.get(MODEL_URL)
-#     with open(MODEL_PATH, "wb") as f:
-#         f.write(response.content)
-#     st.success("Model downloaded successfully!")
-
-# # Load the model
-# st.info("Loading model...")
-# try:
-#     model = tf.keras.models.load_model(MODEL_PATH)
-#     st.success("Model loaded successfully!")
-# except Exception as e:
-#     st.error(f"Error loading model: {e}")
-
-
-# Google Drive file ID
-file_id = "10pavXORFdfGIyFRde_MFhobyuUWezEI5"
-download_url = f"https://drive.google.com/uc?id={file_id}"
-model_path = "model.keras"
-
-# Download the model
-@st.cache_resource
-def load_model():
-    gdown.download(download_url, model_path, quiet=False)
-    model = tf.keras.models.load_model(model_path)
-    return model
+# Download the model if it doesn't exist
+if not os.path.exists(MODEL_PATH):
+    st.info("Please wait...")
+    response = requests.get(MODEL_URL)
+    with open(MODEL_PATH, "wb") as f:
+        f.write(response.content)
+    st.success("Model downloaded successfully!")
 
 # Load the model
-model = load_model()
+st.info("Loading model...")
+try:
+    model = tf.keras.models.load_model(MODEL_PATH)
+    st.success("Model loaded successfully!")
+except Exception as e:
+    st.error(f"Error loading model: {e}")
+
 
 
 class_names = ['apple_pie', 'baby_back_ribs', 'baklava', 'beef_carpaccio', 'beef_tartare', 'beet_salad', 'beignets', 'bibimbap',
